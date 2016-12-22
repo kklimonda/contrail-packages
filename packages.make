@@ -129,6 +129,14 @@ source-package-contrail-vrouter-dpdk: clean-contrail-vrouter-dpdk debian-contrai
 	@echo "Building source package $(PACKAGE)"
 	(cd build/packages/$(PACKAGE); dpkg-buildpackage -S -d -rfakeroot $(KEYOPT))
 
+source-package-contrail-vrouter-dpdk: clean-contrail-vrouter-dpdk debian-contrail-vrouter-dpdk
+	$(eval PACKAGE := contrail-vrouter-dpdk)
+	sed -i 's/VERSION/$(CONTRAIL_VERSION)/g' build/packages/$(PACKAGE)/debian/changelog
+	sed -i 's/SERIES/$(SERIES)/g' build/packages/$(PACKAGE)/debian/changelog
+	tar zcf build/packages/$(PACKAGE)_$(CONTRAIL_VERSION).orig.tar.gz $(SOURCE_CONTRAIL_ARCHIVE)
+	@echo "Building source package $(PACKAGE)"
+	(cd build/packages/$(PACKAGE); dpkg-buildpackage -S -d -rfakeroot $(KEYOPT))
+
 source-ifmap-server:
 	$(eval PACKAGE := ifmap-server)
 	(cd build/packages/$(PACKAGE); fakeroot debian/rules get-orig-source)
