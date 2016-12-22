@@ -12,16 +12,17 @@ else
 	DH_WITH=
 endif
 
+VER := $(shell lsb_release -c)
+KVERS := $(shell basename `ls -d /lib/modules/*|tail -1`)
+KERNELDIR := /lib/modules/$(KVERS)/build
 
+USER ?= root
 
 %:
 	dh $@ $(DH_WITH)
 
-override_dh_auto_clean:
-	(cd ${SB_TOP}; scons -c --opt=production vrouter/dpdk)
-
 override_dh_auto_build:
-	(cd ${SB_TOP}; scons --opt=production vrouter/dpdk --kernel-dir /lib/modules/${KVERS}/build/)
+	(cd ${SB_TOP}; KERNELDIR=$(KERNELDIR) RTE_KERNELDIR=$(KERNELDIR) USER=$(USER) scons --opt=production --optimization=production --root=${INSTALL_ROOT} --kernel-dir=$(KERNELDIR) vrouter/dpdk)
 
 override_dh_auto_install:
 	mkdir -p ${INSTALL_ROOT}/usr/bin
