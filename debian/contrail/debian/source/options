@@ -1,0 +1,3 @@
+tar-ignore = ".repo"
+tar-ignore = ".git"
+extend-diff-ignore = "(^|/)(.repo|tools/packages|.git|packages.make|contrail-web.*)"
