@@ -95,6 +95,7 @@ override_dh_auto_install:
 override_dh_auto_clean:
 	dh_auto_clean
 	rm -rf debian/manpages/*.1 build/ config.log .scon* vrouter/dp-core/vr_buildinfo.c || /bin/true
+	(cd vrouter/ && make clean)
 	find . -name "*.pyc" -delete
 
 override_dh_install:
