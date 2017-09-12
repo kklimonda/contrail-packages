@@ -402,7 +402,7 @@ Depends: python-contrail (>= ${source:Version}),
          python-lxml,
          python-requests,
          ntp,
-         NODEMGRDEP_SERIES
+         ${dbus:Depends},
          ${misc:Depends},
          ${python:Depends},
          ${shlibs:Depends}

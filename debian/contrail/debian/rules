@@ -15,6 +15,7 @@ ifeq $(findstring xenial,$(VER))
         DH_WITH=python2,systemd
 else
         SUBSTVARS = -Vdist:Depends="supervisor"
+	SUBSTVARS += -Vdbus:Depends="dbus, python-pydbus (>= 0.7.0)"
         DH_WITH=python2
 endif
 
