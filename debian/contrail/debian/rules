@@ -11,7 +11,7 @@ DEB_UPSTREAM_VERSION=$(shell dpkg-parsechangelog | sed -rne 's,^Version: ([0-9]:
 package-dkms=contrail-vrouter-dkms
 
 VER := $(shell lsb_release -c)
-ifeq $(findstring xenial,$(VER))
+ifeq ($(findstring xenial,$(VER)),xenial)
         DH_WITH=python2,systemd
 else
         SUBSTVARS = -Vdist:Depends="supervisor"
