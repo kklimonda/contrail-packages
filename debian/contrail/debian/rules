@@ -10,7 +10,7 @@ DEB_UPSTREAM_VERSION=$(shell dpkg-parsechangelog | sed -rne 's,^Version: ([0-9]:
 
 package-dkms=contrail-vrouter-dkms
 
-VER := $(shell lsb_release -c)
+VER := $(shell awk -F"=" '$$1 == "DISTRIB_CODENAME" {print $$NF}' /etc/lsb-release)
 ifeq ($(findstring xenial,$(VER)),xenial)
         DH_WITH=python2,systemd
 else
@@ -39,6 +39,13 @@ TARGETS=control-node:node_mgr \
 
 %:
 	dh $@ --with $(DH_WITH) --parallel
+
+debian/%.install: debian/%.install.in
+	sed -e '/INSTALL_SERIES/ {' -e 'r $@.$(VER)' -e 'd' -e '}' $< > $@
+
+debian/%.dirs: debian/%.dirs.in
+	sed -e '/DIRS_SERIES/ {' -e 'r $@.$(VER)' -e 'd' -e '}' $< > $@
+
 
 override_dh_compress:
 	dh_compress -X.json
