@@ -258,6 +258,9 @@ debian-%:
 	chmod u+x build/packages/$(PACKAGE)/debian/rules
 	(cd build/packages/$(PACKAGE); dch --version $(CONTRAIL_VERSION) && dch --release)
 
+dist-contrail:
+	tar zcf contrail_$(CONTRAIL_VERSION).orig.tar.gz $(SOURCE_CONTRAIL_ARCHIVE)
+
 clean-%:
 	$(eval PACKAGE := $(patsubst clean-%,%,$@))
 	rm -rf build/packages/$(PACKAGE)
