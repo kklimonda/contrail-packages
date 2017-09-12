@@ -105,20 +105,7 @@ source-package-contrail-web-controller: clean-contrail-web-controller debian-con
 package-contrail: debian-contrail
 	$(eval PACKAGE := contrail)
 	@echo "Building package $(PACKAGE)"
-<<<<<<< 21246de77fe10c3d6246bb9f3a316c3bade90194
-	sed -i 's/VERSION/$(CONTRAIL_VERSION)/g' build/packages/$(PACKAGE)/debian/changelog
-	sed -i 's/SERIES/$(SERIES)/g' build/packages/$(PACKAGE)/debian/changelog
-	# Append series specific build depends
-	(cd build/packages/$(PACKAGE)/debian; sed -i '/BUILDDEP_SERIES/r builddep.$(SERIES)' control)
-	sed -i '/BUILDDEP_SERIES/d' build/packages/$(PACKAGE)/debian/control
-	# Append series specific depends
-	(cd build/packages/$(PACKAGE)/debian; sed -i '/SUPERVISORDEP_SERIES/r supervisordep.$(SERIES)' control)
-	sed -i '/SUPERVISORDEP_SERIES/d' build/packages/$(PACKAGE)/debian/control
-	(cd build/packages/$(PACKAGE)/debian; sed -i '/NODEMGRDEP_SERIES/r nodemgrdep.$(SERIES)' control)
-	sed -i '/NODEMGRDEP_SERIES/d' build/packages/$(PACKAGE)/debian/control
-=======
 	dch --distribution $(SERIES) -v $(CONTRAIL_VERSION) -m "Releasing version $(CONTRAIL_VERSION)"
->>>>>>> cleanup packages.make part that substitute contrail source variables.
 	# Append series specific install files
 	$(eval CONTRAIL_INSTALL_SERIES := $(shell cd build/packages/$(PACKAGE)/debian; find . -name '*.install.$(SERIES)'))
 	$(foreach series_fname, $(CONTRAIL_INSTALL_SERIES), \
@@ -141,22 +128,8 @@ package-contrail: debian-contrail
 	chmod u+x build/packages/contrail/debian/rules.modules
 	(cd build/packages/$(PACKAGE); fakeroot debian/rules.modules KVERS=$(KVERS) binary-modules)
 
-source-package-contrail: clean-contrail debian-contrail
 	$(eval PACKAGE := contrail)
-<<<<<<< 21246de77fe10c3d6246bb9f3a316c3bade90194
-	sed -i 's/VERSION/$(CONTRAIL_VERSION)/g' build/packages/$(PACKAGE)/debian/changelog
-	sed -i 's/SERIES/$(SERIES)/g' build/packages/$(PACKAGE)/debian/changelog
-	# Append series specific build depends
-	(cd build/packages/$(PACKAGE)/debian; sed -i '/BUILDDEP_SERIES/r builddep.$(SERIES)' control)
-	sed -i '/BUILDDEP_SERIES/d' build/packages/$(PACKAGE)/debian/control
-	# Append series specific depends
-	(cd build/packages/$(PACKAGE)/debian; sed -i '/SUPERVISORDEP_SERIES/r supervisordep.$(SERIES)' control)
-	sed -i '/SUPERVISORDEP_SERIES/d' build/packages/$(PACKAGE)/debian/control
-	(cd build/packages/$(PACKAGE)/debian; sed -i '/NODEMGRDEP_SERIES/r builddep.$(SERIES)' control)
-	sed -i '/NODEMGRDEP_SERIES/d' build/packages/$(PACKAGE)/debian/control
-=======
 	dch --distribution $(SERIES) -v $(CONTRAIL_VERSION) -m "Releasing version $(CONTRAIL_VERSION)"
->>>>>>> cleanup packages.make part that substitute contrail source variables.
 	# Append series specific install files
 	$(eval CONTRAIL_INSTALL_SERIES := $(shell cd build/packages/$(PACKAGE)/debian; find . -name '*.install.$(SERIES)'))
 	$(foreach series_fname, $(CONTRAIL_INSTALL_SERIES), \
@@ -283,6 +256,7 @@ debian-%:
 	cp -R tools/packages/debian/$(PACKAGE)/debian build/packages/$(PACKAGE)
 	cp -R tools/packages/utils build/packages/$(PACKAGE)/debian/
 	chmod u+x build/packages/$(PACKAGE)/debian/rules
+	(cd build/packages/$(PACKAGE); dch --version $(CONTRAIL_VERSION) && dch --release)
 
 clean-%:
 	$(eval PACKAGE := $(patsubst clean-%,%,$@))
