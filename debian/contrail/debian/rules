@@ -11,10 +11,10 @@ DEB_UPSTREAM_VERSION=$(shell dpkg-parsechangelog | sed -rne 's,^Version: ([0-9]:
 package-dkms=contrail-vrouter-dkms
 
 VER := $(shell lsb_release -c)
-ifeq (,$(findstring precise,$(VER)))
-        SUBSTVARS = -Vdist:Depends="python-cassandra-driver  (>= 3.0.0)"
+ifeq $(findstring xenial,$(VER))
         DH_WITH=python2,systemd
 else
+        SUBSTVARS = -Vdist:Depends="supervisor"
         DH_WITH=python2
 endif
 
