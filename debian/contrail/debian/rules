@@ -12,10 +12,10 @@ package-dkms=contrail-vrouter-dkms
 
 VER := $(shell awk -F"=" '$$1 == "DISTRIB_CODENAME" {print $$NF}' /etc/lsb-release)
 ifeq ($(findstring xenial,$(VER)),xenial)
+	SUBSTVARS += -Vdbus:Depends="dbus, python-pydbus (>= 0.7.0)"
         DH_WITH=python2,systemd
 else
         SUBSTVARS = -Vdist:Depends="supervisor"
-	SUBSTVARS += -Vdbus:Depends="dbus, python-pydbus (>= 0.7.0)"
         DH_WITH=python2
 endif
 
