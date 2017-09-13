@@ -48,6 +48,12 @@ debian/%.install: debian/%.install.in
 debian/%.dirs: debian/%.dirs.in
 	sed -e '/DIRS_SERIES/ {' -e 'r $@.$(VER)' -e 'd' -e '}' $< > $@
 
+get-orig-source:
+	(cd ${SB_TOP}/third_party/ && python fetch_packages.py)
+	tar zcf contrail_4.1.0.0.orig.tar.gz \
+		controller vrouter third_party tools/build tools/generateds \
+		tools/sandesh openstack/nova_contrail_vif openstack/neutron_plugin \
+		openstack/ceilometer_plugin openstack/nova_extensions openstack/contrail-heat \
 
 override_dh_compress:
 	dh_compress -X.json
@@ -68,15 +74,6 @@ override_dh_auto_install:
 	(cd ${SB_TOP}/build/production/vnsw/agent/uve; python setup.py install --root=${INSTALL_ROOT} --install-layout=deb)
 	(cd ${SB_TOP}/build/production/opserver/node_mgr; python setup.py install --root=${INSTALL_ROOT} --install-layout=deb)
 	(cd ${SB_TOP}/build/production/analytics/database; python setup.py install --root=${INSTALL_ROOT} --install-layout=deb)
-	# Configuration for nodemgr
-	for conf in ${SB_TOP}/controller/src/nodemgr/*_nodemgr/*.conf; do \
-		mkdir -m 0755 -p ${INSTALL_ROOT}/usr/share/doc/contrail-`basename $$conf | cut -d '-' -f 2`/examples; \
-		install -p -m 644 -t ${INSTALL_ROOT}/usr/share/doc/contrail-`basename $$conf | cut -d '-' -f 2`/examples $$conf; \
-	done
-	# Configuration for nodemgr supervisord
-	for conf in ${SB_TOP}/controller/src/nodemgr/*_nodemgr/*.ini; do \
-		install -p -m 644 -t ${INSTALL_ROOT}/usr/share/doc/contrail-`basename $$conf | cut -d '-' -f 2`/examples $$conf; \
-	done
 	# Move schema specific files to opserver
 	for mod_dir in ${INSTALL_ROOT}/usr/share/doc/contrail-docs/html/messages/*; do \
 		if [ -d $$mod_dir ]; then \
