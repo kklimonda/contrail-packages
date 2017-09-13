@@ -1,0 +1,12 @@
+usr/bin/contrail-control*
+etc/contrail/contrail-control.conf
+usr/lib/python*/dist-packages/ContrailControlCli*
+# trusty supervisor-style init scripts
+etc/init.d/contrail-control [ubuntu-trusty]
+etc/contrail/supervisord_control.conf [ubuntu-trusty]
+etc/contrail/supervisord_control_files/contrail-control.rules [ubuntu-trusty]
+etc/contrail/supervisord_control_files/contrail-control.ini [ubuntu-trusty]
+# xenial systemd services
+etc/contrail/contrail-control-nodemgr.conf [ubuntu-xenial]
+lib/systemd/system/contrail-control-nodemgr.service [ubuntu-xenial]
+lib/systemd/system/contrail-control.service [ubuntu-xenial]

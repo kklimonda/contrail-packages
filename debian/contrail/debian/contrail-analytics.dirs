@@ -1,0 +1,4 @@
+var/lib/contrail
+etc/contrail
+var/log/contrail
+etc/contrail/supervisord_analytics_files [ubuntu-trusty]

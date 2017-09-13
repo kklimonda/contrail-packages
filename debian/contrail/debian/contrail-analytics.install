@@ -1,0 +1,49 @@
+usr/bin/contrail-collector*
+usr/bin/contrail-query-engine*
+usr/bin/contrail-analytics-api*
+usr/bin/contrail-logs
+usr/bin/contrail-db
+usr/bin/contrail-stats
+usr/bin/contrail-flows
+usr/bin/contrail-logs-api-audit
+usr/bin/contrail-snmp-*
+usr/bin/contrail-topology*
+usr/bin/contrail-alarm-gen*
+usr/bin/contrail-alarm-notify
+etc/contrail/contrail-collector.conf
+etc/contrail/contrail-query-engine.conf
+etc/contrail/contrail-analytics-api.conf
+etc/contrail/contrail-alarm-gen.conf
+etc/contrail/contrail-snmp-collector.conf
+etc/contrail/contrail-topology.conf
+etc/contrail/snmp.conf
+usr/lib/python*/dist-packages/opserver*
+usr/lib/python*/dist-packages/contrail_snmp_collector*
+usr/lib/python*/dist-packages/contrail_topology*
+usr/lib/python*/dist-packages/ContrailAnalyticsCli*
+usr/share/doc/contrail-analytics-api
+usr/share/mibs/netsnmp/*
+# trusty supervisor-style init scripts
+etc/init.d/contrail-collector [ubuntu-trusty]
+etc/init.d/contrail-query-engine [ubuntu-trusty]
+etc/init.d/contrail-analytics-api [ubuntu-trusty]
+etc/init.d/contrail-snmp-collector [ubuntu-trusty]
+etc/init.d/contrail-topology [ubuntu-trusty]
+etc/init.d/contrail-alarm-gen [ubuntu-trusty]
+etc/contrail/supervisord_analytics.conf [ubuntu-trusty]
+etc/contrail/supervisord_analytics_files/contrail-analytics.rules [ubuntu-trusty]
+etc/contrail/supervisord_analytics_files/contrail-collector.ini [ubuntu-trusty]
+etc/contrail/supervisord_analytics_files/contrail-query-engine.ini [ubuntu-trusty]
+etc/contrail/supervisord_analytics_files/contrail-analytics-api.ini [ubuntu-trusty]
+etc/contrail/supervisord_analytics_files/contrail-snmp-collector.ini [ubuntu-trusty]
+etc/contrail/supervisord_analytics_files/contrail-topology.ini [ubuntu-trusty]
+etc/contrail/supervisord_analytics_files/contrail-alarm-gen.ini [ubuntu-trusty]
+# xenial systemd services
+etc/contrail/contrail-analytics-nodemgr.conf [ubuntu-xenial]
+lib/systemd/system/contrail-analytics-nodemgr.service [ubuntu-xenial]
+lib/systemd/system/contrail-collector.service [ubuntu-xenial]
+lib/systemd/system/contrail-query-engine.service [ubuntu-xenial]
+lib/systemd/system/contrail-analytics-api.service [ubuntu-xenial]
+lib/systemd/system/contrail-snmp-collector.service [ubuntu-xenial]
+lib/systemd/system/contrail-topology.service [ubuntu-xenial]
+lib/systemd/system/contrail-alarm-gen.service [ubuntu-xenial]

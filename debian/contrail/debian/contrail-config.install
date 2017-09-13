@@ -1,0 +1,42 @@
+usr/bin/contrail-api*
+usr/bin/contrail-schema*
+usr/bin/contrail-device-manager*
+usr/bin/contrail-issu-pre-sync
+usr/bin/contrail-issu-run-sync
+usr/bin/contrail-issu-post-sync
+usr/bin/contrail-issu-zk-sync
+etc/contrail/contrail-api.conf
+etc/contrail/contrail-schema.conf
+etc/contrail/contrail-device-manager.conf
+usr/lib/python*/dist-packages/contrail_issu*
+usr/lib/python*/dist-packages/device_api*
+usr/lib/python*/dist-packages/device_manager*
+usr/lib/python*/dist-packages/schema_transformer*
+usr/lib/python*/dist-packages/vnc_cfg_api_server*
+usr/lib/python*/dist-packages/ContrailConfigCli*
+usr/share/doc/contrail-config
+# trusty supervisor-style init scripts
+etc/contrail/contrail-config-nodemgr.conf [ubuntu-trusty]
+etc/init.d/contrail-api [ubuntu-trusty]
+etc/init.d/contrail-schema [ubuntu-trusty]
+etc/init.d/contrail-svc-monitor [ubuntu-trusty]
+etc/init.d/contrail-device-manager [ubuntu-trusty]
+etc/init.d/contrail-issu-run-sync [ubuntu-trusty]
+etc/init.d/contrail-config-nodemgr [ubuntu-trusty]
+etc/contrail/supervisord_config.conf [ubuntu-trusty]
+etc/contrail/supervisord_issu.conf [ubuntu-trusty]
+etc/contrail/supervisord_config_files/contrail-api.ini [ubuntu-trusty]
+etc/contrail/supervisord_config_files/contrail-schema.ini [ubuntu-trusty]
+etc/contrail/supervisord_config_files/contrail-svc-monitor.ini [ubuntu-trusty]
+etc/contrail/supervisord_config_files/contrail-device-manager.ini [ubuntu-trusty]
+etc/contrail/supervisord_config_files/contrail-config-nodemgr.ini [ubuntu-trusty]
+etc/contrail/supervisord_config_files/contrail-config.rules [ubuntu-trusty]
+etc/contrail/supervisord_issu_files/contrail-issu-run-sync.ini [ubuntu-trusty]
+# xenial systemd services
+etc/contrail/contrail-config-nodemgr.conf [ubuntu-xenial]
+lib/systemd/system/contrail-config-nodemgr.service [ubuntu-xenial]
+lib/systemd/system/contrail-api.service [ubuntu-xenial]
+lib/systemd/system/contrail-schema.service [ubuntu-xenial]
+lib/systemd/system/contrail-svc-monitor.service [ubuntu-xenial]
+lib/systemd/system/contrail-device-manager.service [ubuntu-xenial]
+lib/systemd/system/contrail-issu-run-sync.service [ubuntu-xenial]

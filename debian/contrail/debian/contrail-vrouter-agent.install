@@ -1,0 +1,20 @@
+usr/bin/contrail-vrouter-agent*
+usr/bin/contrail-tor-agent*
+usr/bin/vrouter-port-control
+usr/bin/contrail-compute-setup
+usr/bin/contrail-vrouter-agent-health-check.py
+etc/contrail/contrail-vrouter-agent.conf
+etc/contrail/contrail-vrouter-nodemgr.conf
+usr/lib/python*/dist-packages/ContrailVrouterCli*
+usr/lib/python*/dist-packages/contrail_vrouter_provisioning*
+usr/bin/contrail-toragent-setup
+usr/bin/contrail-toragent-cleanup
+# trusty supervisor-like init scripts
+etc/init.d/contrail-vrouter-agent [ubuntu-xenial]
+etc/init.d/contrail-vrouter-nodemgr [ubuntu-xenial]
+etc/contrail/supervisord_vrouter.conf [ubuntu-xenial]
+etc/contrail/supervisord_vrouter_files/contrail-vrouter-agent.ini [ubuntu-xenial]
+# xenial systemd services
+etc/contrail/contrail-vrouter-nodemgr.conf [ubuntu-xenial]
+lib/systemd/system/contrail-vrouter-nodemgr.service [ubuntu-xenial]
+lib/systemd/system/contrail-vrouter-agent.service [ubuntu-xenial]
