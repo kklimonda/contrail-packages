@@ -1,3 +1,4 @@
+#!/usr/bin/dh-exec
 usr/bin/contrail-api*
 usr/bin/contrail-schema*
 usr/bin/contrail-device-manager*

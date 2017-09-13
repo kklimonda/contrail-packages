@@ -1,3 +1,4 @@
+#!/usr/bin/dh-exec
 usr/bin/contrail-collector*
 usr/bin/contrail-query-engine*
 usr/bin/contrail-analytics-api*
