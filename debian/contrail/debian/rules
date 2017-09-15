@@ -54,6 +54,7 @@ get-orig-source:
 		controller vrouter third_party tools/build tools/generateds \
 		tools/sandesh openstack/nova_contrail_vif openstack/neutron_plugin \
 		openstack/ceilometer_plugin openstack/nova_extensions openstack/contrail-heat \
+		SConstruct
 
 override_dh_compress:
 	dh_compress -X.json
