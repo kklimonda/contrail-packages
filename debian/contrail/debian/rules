@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
 
-export DH_EXEC_SCRIPTDIR="debian/dh-exec"
+export DH_EXEC_SCRIPTDIR=debian/dh-exec
 
 export INSTALL_ROOT="$(shell pwd)/debian/tmp"
 SB_TOP := $(shell pwd | sed -re "s/(.*)\/build\/packages(.*)/\1/")
