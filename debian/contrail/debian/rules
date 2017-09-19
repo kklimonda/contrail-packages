@@ -50,7 +50,7 @@ debian/%.dirs: debian/%.dirs.in
 
 get-orig-source:
 	(cd ${SB_TOP}/third_party/ && python fetch_packages.py)
-	tar zcf contrail_4.1.0.0.orig.tar.gz \
+	tar zcf contrail_${DEB_UPSTREAM_VERSION}.orig.tar.gz \
 		controller vrouter third_party tools/build tools/generateds \
 		tools/sandesh openstack/nova_contrail_vif openstack/neutron_plugin \
 		openstack/ceilometer_plugin openstack/nova_extensions openstack/contrail-heat \
