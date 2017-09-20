@@ -12,6 +12,14 @@ DEB_UPSTREAM_VERSION=$(shell dpkg-parsechangelog | sed -rne 's,^Version: ([0-9]:
 
 package-dkms=contrail-vrouter-dkms
 
+ifeq ($(KERNEL_DIR),)
+	KERNEL_DIR_ARG=""
+	KERNELDIR=""
+else
+	KERNEL_DIR_ARG="--kernel-dir $(KERNEL_DIR)"
+	KERNELDIR=$(KERNEL_DIR)
+endif
+
 VER := $(shell awk -F"=" '$$1 == "DISTRIB_CODENAME" {print $$NF}' /etc/lsb-release)
 ifeq ($(findstring xenial,$(VER)),xenial)
 	SUBSTVARS += -Vdbus:Depends="dbus, python-pydbus (>= 0.7.0)"
@@ -60,16 +68,16 @@ override_dh_compress:
 	dh_compress -X.json
 
 override_dh_auto_build:
-	(cd ${SB_TOP}; scons $(JOBS) --opt=production --root=${INSTALL_ROOT})
+	(cd ${SB_TOP}; KERNELDIR=$(KERNEL_DIR) scons $(JOBS) --opt=production --root=${INSTALL_ROOT}) $(KERNEL_DIR_ARG)
 
 override_dh_auto_install:
 	cd debian/manpages; ronn -r *.ronn
-	(cd ${SB_TOP}; scons $(JOBS) --opt=production --root=${INSTALL_ROOT} install)
+	(cd ${SB_TOP}; KERNELDIR=$(KERNEL_DIR) scons $(JOBS) --opt=production --root=${INSTALL_ROOT} $(KERNEL_DIR_ARG) install)
 	mkdir -p ${INSTALL_ROOT}/_debian/tmp
 	(cd ${INSTALL_ROOT}/usr/src/vrouter && tar zcf ${INSTALL_ROOT}/_debian/tmp/contrail-vrouter-$(DEB_UPSTREAM_VERSION).tar.gz .)
 	sed "s/__VERSION__/$(DEB_UPSTREAM_VERSION)/g" debian/dkms.conf.in > ${INSTALL_ROOT}/usr/src/vrouter/dkms.conf
 	# Node manager - XXX: Add node_mgr targets to the default list of targets
-	(cd ${SB_TOP}; scons $(JOBS) --opt=production --root=${INSTALL_ROOT} ${TARGETS})
+	(cd ${SB_TOP}; KERNELDIR=$(KERNELDIR) scons $(JOBS) --opt=production --root=${INSTALL_ROOT} $(KERNEL_DIR_ARG) ${TARGETS})
 	(cd ${SB_TOP}/build/production/nodemgr; python setup.py install --root=${INSTALL_ROOT} --install-layout=deb)
 	(cd ${SB_TOP}/build/production/control-node; python setup.py install --root=${INSTALL_ROOT} --install-layout=deb)
 	(cd ${SB_TOP}/build/production/vnsw/agent/uve; python setup.py install --root=${INSTALL_ROOT} --install-layout=deb)
@@ -102,7 +110,7 @@ override_dh_auto_install:
 override_dh_auto_clean:
 	dh_auto_clean
 	rm -rf debian/manpages/*.1 build/ config.log .scon* vrouter/dp-core/vr_buildinfo.c || /bin/true
-	(cd vrouter/ && make clean)
+	(cd vrouter/ && KERNELDIR=$(KERNEL_DIR) make clean)
 	find . -name "*.pyc" -delete
 
 override_dh_install:
